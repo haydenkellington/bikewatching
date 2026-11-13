@@ -4,11 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bikewatching</title>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" />
     <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="map.css" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <script src="map.js" type="module"></script>
   </head>
   <body>
-    <h1>🚴🏼‍♀️ Bikewatching</h1>
-    <p>A project for exploring bicycle activity.</p>
+    <header>
+      <div>
+        <h1>🚴🏼‍♀️ Bikewatching</h1>
+        <p>Explore bike lanes and Bluebikes station traffic in Boston and Cambridge.</p>
+      </div>
+      <div class="time-controls">
+        <label for="time-slider" class="time-filter">
+          Filter by time
+          <input id="time-slider" type="range" min="-1" max="1440" value="-1" step="1" />
+          <span class="time-display"><time id="selected-time"></time><em id="any-time">(any time)</em></span>
+        </label>
+        <button id="play-time" type="button" disabled>Play</button>
+      </div>
+    </header>
+    <p class="map-note">Circle area shows trips in March 2024. Select a time to see arrivals and departures within one hour of it.</p>
+    <div id="map" aria-label="Map of bicycle lanes and Bluebikes station traffic"><svg aria-hidden="true"></svg></div>
+    <p id="map-status" role="status">Loading station traffic…</p>
+    <div class="legend" aria-label="Station traffic flow legend">
+      <strong>Station flow:</strong>
+      <div style="--departure-ratio: 1">More departures</div>
+      <div style="--departure-ratio: 0.5">Balanced</div>
+      <div style="--departure-ratio: 0">More arrivals</div>
+    </div>
   </body>
 </html>
